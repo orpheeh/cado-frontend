@@ -1,6 +1,6 @@
 
 export default function loadMap(mapid) {
-    let mymap = L.map(mapid).setView([51.505, -0.09], 13);
+    let mymap = L.map(mapid).setView([0.42185, 9.4450316], 19);
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',

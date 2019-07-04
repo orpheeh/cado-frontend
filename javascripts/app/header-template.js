@@ -22,10 +22,22 @@ export default () => `
                 <a href="#" class="link">
                     <li class="fa fa-info-circle"></li>
                 </a>
-                <span id="username">
+                <span id="username" class="dd-r-button">
                     M
                 </span>
             </div>
+
+            <div class="dd-container">
+                <!-- Dropdown of profil -->
+                <div class="dd-r dd" id="profil-dd">
+                    <div class="dd-group">
+                        <h1>username</h1>
+                    </div>
+
+                    <a href="#" class="dd-link" id="logout-button">Se déconnecter</a>
+                </div>
+            </div>
+            
         </div>
 `;
 

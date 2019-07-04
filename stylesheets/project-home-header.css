@@ -71,3 +71,52 @@
     margin: 3px;
     border-radius: 2px;
 }
+
+/**
+Dropdown
+*/
+
+.dd-container {
+    z-index: 100000000;
+}
+
+.dd {
+    background-color: white;
+    border-radius: 5px;
+    display: inline-block;
+    border: 1px solid #eeeeee;
+}
+
+.dd-r {
+    box-shadow: -1px 10px 10px #eeeeee;
+    position: fixed;
+    top: 55px;
+    right: 0px;
+    margin-right: 10px;
+}
+
+.dd h1 {
+    font-weight: normal;
+    font-size: 14px;
+    color: #aaaaaa;
+    text-align: center;
+    padding: 10px;
+}
+
+.dd a {
+    text-decoration: none;
+    color: #777777;
+    display: inline-block;
+    font-size: 14px;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0px;
+}
+
+.dd a:hover {
+    background-color: #eeeeee;
+}
+
+.dd .dd-group {
+    border-bottom: 1px solid #cccccc;
+}
