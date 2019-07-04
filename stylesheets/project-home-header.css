@@ -16,7 +16,7 @@
     background-color: #00701a;
     height: 48px;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
 }
 
 .project-header-content .grid-item {
@@ -56,4 +56,18 @@
 
 #username:hover {
     cursor: pointer;
+}
+
+.go-to-app-home-link img {
+    width: 38px;
+    height: 38px;
+    padding: 5px;
+}
+
+.go-to-app-home-link {
+    background-color: #00701a44;
+    display: inline-block;
+    text-decoration: none;
+    margin: 3px;
+    border-radius: 2px;
 }

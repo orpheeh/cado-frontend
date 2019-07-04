@@ -11,6 +11,10 @@ export default () => `
                 </a>
             </div>
 
+            <div class="middle-content">
+                <a href="app-home.html" class="go-to-app-home-link"><img src="../images/cado-shortcut.png" alt="cado"/></a>
+            </div>
+
             <div class="project-header-menu-2 grid-item">
                 <a href="#" class="link">
                     <li class="fa fa-plus"></li>
