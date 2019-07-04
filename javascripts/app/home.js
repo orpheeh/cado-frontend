@@ -85,11 +85,25 @@ window.addEventListener('load', function () {
         this.window.localStorage.removeItem(storage.KEY_USER_PROJECT_ID);
         this.window.localStorage.removeItem(storage.KEY_USER_PROJECT_TITLE);
         this.window.localStorage.removeItem(storage.KEY_USER_PROJECT_DESCRIPTION);
-        this.window.location = "index.html";
-
-
+        this.window.location = "../index.html";
     });
 
+    //Show dropdown profil
+    this.document.getElementById('username').onclick = ()=> {
+        this.document.querySelector('#profil-dd').classList.add('dd-active');
+    }
+
+});
+
+//Close all dropdown
+window.addEventListener('click', (e) => {
+    const dds = document.querySelectorAll('.dd');
+    dds.forEach((dd) => {
+        const id = dd.classList[0].split('dd-parent-')[1];
+        if(e.target.id.toString() !== id){
+            dd.classList.remove('dd-active');
+        }
+    });
 });
 
 function getUserInfo() {
@@ -103,6 +117,7 @@ function getUserInfo() {
         return response.json();
     }).then((data) => {
         document.querySelector('#username').innerHTML = data.username.charAt(0);
+        document.querySelector('#complet-username').innerHTML = data.username;
         window.localStorage.setItem(storage.KEY_USER_ID, data.uid);
         window.localStorage.setItem(storage.KEY_USER_USERNAME, data.username);
         window.localStorage.setItem(storage.KEY_USER_EMAIL, data.email);

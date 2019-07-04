@@ -28,10 +28,12 @@ export default () => `
             </div>
 
             <div class="dd-container">
+                <!-- Important! put dd-parent-id_of_source at first of class list -->
                 <!-- Dropdown of profil -->
-                <div class="dd-r dd" id="profil-dd">
+                <div class="dd-parent-username dd-r dd" id="profil-dd">
                     <div class="dd-group">
-                        <h1>username</h1>
+                        <h1 id="complet-username">username</h1>
+                        <span class="close-dd">&times;</span>
                     </div>
 
                     <a href="#" class="dd-link" id="logout-button">Se déconnecter</a>

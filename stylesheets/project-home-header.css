@@ -85,6 +85,11 @@ Dropdown
     border-radius: 5px;
     display: inline-block;
     border: 1px solid #eeeeee;
+    display: none;
+}
+
+.dd-active {
+    display: block;
 }
 
 .dd-r {
@@ -101,6 +106,19 @@ Dropdown
     color: #aaaaaa;
     text-align: center;
     padding: 10px;
+    display: inline-block;
+}
+
+.dd .close-dd {
+    display: inline-block;
+    font-size: 24px;
+    margin-left: 20px;
+    vertical-align: top;
+}
+
+.dd .close-dd:hover {
+    color: #cccccc;
+    cursor: pointer;
 }
 
 .dd a {

@@ -5,11 +5,21 @@ import login from "./login-service.js"
 window.addEventListener('load', function () {
     //Add header on to the home page of cado web site
     load_header(header_template());
-    this.document.getElementById('login-btn').addEventListener('click', () => {
+    this.document.getElementById('login-btn').addEventListener('click', (e) => {
+        e.target.innerHTML = '<li class="fa fa-spinner fa-spin"></li> Connexion en cour';
         //Perform login
         const user = getAuthInformation();
         if (verifyInformationIntegrity(user)) {
-            login(user.username, user.password);
+            login(user.username, user.password, (data)=> {
+                if(data.status === 401){
+                    inputError('username', "Ce nom d'utilisateur n'est pas reconnu");
+                    e.target.innerHTML = 'Connexion';
+
+                } else if(data.status === 403){
+                    inputError('password', "Mode de passe incorrecte");
+                    e.target.innerHTML = 'Connexion';
+                }
+            });
         }
     });
     //Remove invalide input after change
@@ -26,14 +36,20 @@ function verifyInformationIntegrity(user) {
         inputError('password', 'Vous devez remplir ce champ');
         result = false;
     }
+    if(result === false){
+        document.getElementById('login-btn').innerHTML = 'Connexion';
+    }
     return result;
 }
 
 function getAuthInformation() {
-    return {
+    const passwdField = document.getElementById('password');
+    const result = {
         username: document.getElementById('username').value,
-        password: document.getElementById('password').value
+        password: passwdField.value
     }
+    passwdField.value = '';
+    return result;
 }
 
 function inputError(id, message) {
