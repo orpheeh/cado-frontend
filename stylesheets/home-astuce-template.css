@@ -1,0 +1,30 @@
+
+.cado-astuce {
+    width: 400px;
+    height: 250px;
+    border: 2px solid #eeeeee;
+    border-radius: 5px;
+}
+
+.illustration {
+    width: 100%;
+    height: 45%;
+}
+
+.header-title {
+    font-size: 14px;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.more-details {
+    font-size: 12px;
+    text-align: justify;
+    font-weight: normal;
+    padding: 20px;
+}
+
+.header-title a {
+    text-decoration: none;
+    color: black;
+}

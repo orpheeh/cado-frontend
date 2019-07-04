@@ -1,0 +1,100 @@
+
+/*
+69f0ae
+2bbd7e
+9fffe0
+*/
+
+.main {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin: 80px;
+}
+
+.app-home-left-nav-button {
+    border-radius: 3px;
+    color: #333333;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    width: 200px;
+}
+
+.app-home-left-nav-button-active {
+    background-color: #76d27544;
+    color: #43a047;
+}
+
+.app-content-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #0a1b53;
+}
+
+.app-center-content .project .content {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 20px;
+    margin-top: 20px;
+}
+
+.app-new-button {
+    text-decoration: none;
+    color: #777777;
+    background-color: #eeeeee;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 90px;
+    display: inline-block;
+    border-radius: 3px;
+    display: inline-block;
+
+}
+
+.app-project-button {
+    text-decoration: none;
+    background-color: #1a237e;
+    color: #ffffff;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 3px;
+    height: 90px;
+}
+
+.app-new-button:hover {
+    background-color: #cccccc;
+}
+
+.app-project-button:hover {
+    background-color: #69f0ae;
+}
+
+.app-left-nav {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    height: 150px;
+}
+
+.app-center-content .app-center-item {
+    display: none;
+}
+
+.app-center-content .app-center-item-show {
+    display: block;
+}
+
+.modal {
+    display: none;
+}
+
+.display-modal {
+    display: block;
+}

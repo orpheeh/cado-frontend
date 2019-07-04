@@ -1,0 +1,35 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.map-view {
+    width: 100vw;
+    height: 80vh;
+}
+
+.app-top-menu-bar {
+    width: 100%;
+    height: 48px;
+    background-color: #43a047;
+}
+
+.link-and-input input{
+    display: none;
+}
+
+.link-and-input a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 11px 10px;
+    margin: 2px;
+    display: inline-block;
+}
+
+.link-and-input a:hover {
+    background-color: #228527;
+    border-radius: 5px;
+}

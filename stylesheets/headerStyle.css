@@ -1,0 +1,51 @@
+/*
+69f0ae
+2bbd7e
+9fffe0
+*/
+
+* {
+    font-family: 'DM Sans', sans-serif;
+    box-sizing: border-box;
+}
+
+header .h-content {
+    display: grid;
+    grid-template-columns: auto auto;
+    height: 90px;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.logo img {
+    height: 60px;
+    margin: 10px;
+}
+
+.logo a {
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(0, 128, 0);
+}
+
+.nav-bar {
+    text-align: right;
+    padding: 30px 20px;
+    font-weight: bold;
+}
+
+.nav-bar-item {
+    text-decoration: none;
+    padding: 20px;
+    color: #2bbd7e;
+    font-size: 18px;
+}
+
+.default-button {
+    display: inline-block;
+    text-decoration: none;
+    color: #ffffff;
+    background: #2bbd7e;
+    padding: 15px 20px;
+    border-radius: 30px;
+}
