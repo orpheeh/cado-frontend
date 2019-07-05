@@ -12,7 +12,7 @@ export default () => `
             </div>
 
             <div class="middle-content">
-                <a href="/views/app-pages/app-home.html" class="go-to-app-home-link"><img src="/images/cado-shortcut.png" alt="cado"/></a>
+                <a href="/cado/views/app-pages/app-home.html" class="go-to-app-home-link"><img src="/images/cado-shortcut.png" alt="cado"/></a>
             </div>
 
             <div class="project-header-menu-2 grid-item">

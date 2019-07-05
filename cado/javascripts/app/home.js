@@ -1,11 +1,11 @@
-import astuce from "/javascripts/app/home-astuce-template.js"
-import create_project_modal from "/javascripts/app/create-project-modal.js"
-import { create_project, get_all_projects } from "/javascripts/app/project.js"
-import header_template from "/javascripts/app/header-template.js"
-import load_header from "/javascripts/util/header-loader.js"
-import { CADO_API_URL } from "/javascripts/util/api.js"
-import * as storage from "/javascripts/util/local-storage-key-data.js"
-import { toDoOnWindowsLoad, toDoOnWindowsClick } from "/javascripts/app/header-bar.js"
+import astuce from "/cado/javascripts/app/home-astuce-template.js"
+import create_project_modal from "/cado/javascripts/app/create-project-modal.js"
+import { create_project, get_all_projects } from "/cado/javascripts/app/project.js"
+import header_template from "/cado/javascripts/app/header-template.js"
+import load_header from "/cado/javascripts/util/header-loader.js"
+import { CADO_API_URL } from "/cado/javascripts/util/api.js"
+import * as storage from "/cado/javascripts/util/local-storage-key-data.js"
+import { toDoOnWindowsLoad, toDoOnWindowsClick } from "/cado/javascripts/app/header-bar.js"
 
 window.addEventListener('load', function () {
     //Verify Authorization

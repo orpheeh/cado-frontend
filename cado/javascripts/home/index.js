@@ -1,6 +1,6 @@
-import header_template from "/javascripts/home/main-header-template.js"
-import load_header from "/javascripts/util/header-loader.js"
-import * as storage from "/javascripts/util/local-storage-key-data.js"
+import header_template from "/cado/javascripts/home/main-header-template.js"
+import load_header from "/cado/javascripts/util/header-loader.js"
+import * as storage from "/cado/javascripts/util/local-storage-key-data.js"
 
 window.addEventListener('load', function(){
     

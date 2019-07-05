@@ -1,7 +1,7 @@
-import header_template from "/javascripts/app/header-template.js"
-import map_loader from "/javascripts/app/map.js"
-import load_header from "/javascripts/util/header-loader.js"
-import * as storage from "/javascripts/util/local-storage-key-data.js"
+import header_template from "/cado/javascripts/app/header-template.js"
+import map_loader from "/cado/javascripts/app/map.js"
+import load_header from "/cado/javascripts/util/header-loader.js"
+import * as storage from "/cado/javascripts/util/local-storage-key-data.js"
 
 window.addEventListener('load', () => {
     //Verify Authorization

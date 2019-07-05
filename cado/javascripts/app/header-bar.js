@@ -1,4 +1,4 @@
-import * as storage from "/javascripts/util/local-storage-key-data.js"
+import * as storage from "/cado/javascripts/util/local-storage-key-data.js"
 
 export function toDoOnWindowsLoad() {
     //Logout the app
@@ -10,7 +10,7 @@ export function toDoOnWindowsLoad() {
         window.localStorage.removeItem(storage.KEY_USER_PROJECT_ID);
         window.localStorage.removeItem(storage.KEY_USER_PROJECT_TITLE);
         window.localStorage.removeItem(storage.KEY_USER_PROJECT_DESCRIPTION);
-        window.location = "/index.html";
+        window.location = "/cado/index.html";
     });
     //Show dropdown profil
     document.getElementById('username').onclick = () => {

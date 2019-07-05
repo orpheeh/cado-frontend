@@ -1,5 +1,5 @@
-import { CADO_API_URL } from "/javascripts/util/api.js"
-import { KEY_AUTHENTIFICATION_TOKEN } from "/javascripts/util/local-storage-key-data.js"
+import { CADO_API_URL } from "/cado/javascripts/util/api.js"
+import { KEY_AUTHENTIFICATION_TOKEN } from "/cado/javascripts/util/local-storage-key-data.js"
 
 export default function login(user, password, callback = ()=>{}) {
     fetch(CADO_API_URL + '/api/auth', {

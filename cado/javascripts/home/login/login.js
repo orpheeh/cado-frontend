@@ -1,6 +1,6 @@
-import header_template from "/javascripts/home/main-header-template.js"
-import login from "/javascripts/home/login/login-service.js"
-import load_header from "/javascripts/util/header-loader.js"
+import header_template from "/cado/javascripts/home/main-header-template.js"
+import login from "/cado/javascripts/home/login/login-service.js"
+import load_header from "/cado/javascripts/util/header-loader.js"
 
 window.addEventListener('load', function () {
     //Add header on to the home page of cado web site

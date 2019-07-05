@@ -1,7 +1,7 @@
-import header_template from "/javascripts/home/main-header-template.js"
-import register from "/javascripts/home/register/register-service.js"
-import login from "/javascripts/home/login/login-service.js"
-import load_header from "/javascripts/util/header-loader.js"
+import header_template from "/cado/javascripts/home/main-header-template.js"
+import register from "/cado/javascripts/home/register/register-service.js"
+import login from "/cado/javascripts/home/login/login-service.js"
+import load_header from "/cado/javascripts/util/header-loader.js"
 
 const REGISTER_BUTTON_MESSAGE_LOGIN = '<i class="fa fa-spinner fa-spin"></i> Connexion en cours';
 const REGISTER_BUTTON_MESSAGE_REGISTER = '<i class="fa fa-spinner fa-spin></i> Inscription en cours';
