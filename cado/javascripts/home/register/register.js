@@ -102,7 +102,7 @@ function onRegisterRequestResponse(data, user) {
     if (data.status === 200) {
         register_button.innerHTML = REGISTER_BUTTON_MESSAGE_LOGIN;
         login(user.username, user.password, () => { });
-    } else {
+    } else if(data.status === 403){
         if (data.err.errmsg.includes('email')) {
             inputError('email', EMAIL_EXIST_MESSAGE);
         }
@@ -110,5 +110,8 @@ function onRegisterRequestResponse(data, user) {
             inputError('username', USERNAME_EXIST_MESSAGE);
         }
         register_button.innerHTML = REGISTER_BUTTON_MESSAGE_NORMAL;
+    } else {
+        console.log('Server error');
+        console.log(data);
     }
 }

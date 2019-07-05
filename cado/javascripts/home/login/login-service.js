@@ -14,7 +14,7 @@ export default function login(user, password, callback = ()=>{}) {
         callback(data);
         if(data.status === 200){
             window.localStorage.setItem(KEY_AUTHENTIFICATION_TOKEN, data.token);
-            window.location = "/views/app-pages/app-home.html";
+            window.location = "/cado/views/app-pages/app-home.html";
         }
     });
 }
