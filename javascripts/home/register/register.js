@@ -1,7 +1,7 @@
-import header_template from "../home/main-header-template.js"
-import load_header from "../util/header-loader.js"
-import register from "./register-service.js"
-import login from "../login/login-service.js"
+import header_template from "/javascripts/home/main-header-template.js"
+import register from "/javascripts/home/register/register-service.js"
+import login from "/javascripts/home/login/login-service.js"
+import load_header from "/javascripts/util/header-loader.js"
 
 const REGISTER_BUTTON_MESSAGE_LOGIN = '<i class="fa fa-spinner fa-spin"></i> Connexion en cours';
 const REGISTER_BUTTON_MESSAGE_REGISTER = '<i class="fa fa-spinner fa-spin></i> Inscription en cours';
@@ -12,9 +12,10 @@ const USERNAME_EXIST_MESSAGE = "Cet utilisateur existe déjà";
 const EMPTY_FIELD_MESSAGE = "Ce champ ne doit pas être vide";
 
 window.addEventListener('load', () => {
-    //Add header on to register.html
+    //Add header on of register.html
     load_header(header_template());
-    //On register button click do :
+
+    //On register button click do request create account
     const register_button = document.getElementById('register-btn');
     register_button.addEventListener('click', () => {
         //Get All user information from register form
@@ -24,26 +25,19 @@ window.addEventListener('load', () => {
             verifyPasswordMatch(user.password, user.password_conf)) {
             //Register
             register_button.innerHTML = REGISTER_BUTTON_MESSAGE_REGISTER;
-            register(user.username, user.email, user.password, (data) => {
-                if(data.status === 200){
-                    register_button.innerHTML = REGISTER_BUTTON_MESSAGE_LOGIN;
-                    login(user.username, user.password, () => {});
-                } else {
-                    if(data.err.errmsg.includes('email')){
-                        inputError('email', EMAIL_EXIST_MESSAGE);
-                    } 
-                    if(data.err.errmsg.includes('username')){
-                        inputError('username', USERNAME_EXIST_MESSAGE);
-                    }
-                    register_button.innerHTML = REGISTER_BUTTON_MESSAGE_NORMAL;
-                }
-            });
+            register(user.username, user.email, user.password, 
+                (data) => onRegisterRequestResponse(data, user));
         }
     });
+    
+    //Remove invalid invalid input style on user informations form field
     removeInvalideInput();
 });
 
 function verifyPasswordMatch(pass1, pass2) {
+    if(pass1 !== pass2){
+        inputError('password_conf', "Oups! Ce mot de passe est différent du précédent");
+    }
     return pass1 === pass2;
 }
 
@@ -54,7 +48,7 @@ function verifyInformationItegrity(user) {
         result = false;
     }
     if (user.password === '') {
-        inputError('password',EMPTY_FIELD_MESSAGE);
+        inputError('password', EMPTY_FIELD_MESSAGE);
         result = false;
     }
     if (user.password_conf === '') {
@@ -90,5 +84,21 @@ function removeInvalideInput() {
             inputs[i].classList.remove('invalide-input');
             document.querySelector('label[for=' + inputs[i].id + ']').innerHTML = '';
         });
+    }
+}
+
+function onRegisterRequestResponse(data, user) {
+    const register_button = document.getElementById('register-btn');
+    if (data.status === 200) {
+        register_button.innerHTML = REGISTER_BUTTON_MESSAGE_LOGIN;
+        login(user.username, user.password, () => { });
+    } else {
+        if (data.err.errmsg.includes('email')) {
+            inputError('email', EMAIL_EXIST_MESSAGE);
+        }
+        if (data.err.errmsg.includes('username')) {
+            inputError('username', USERNAME_EXIST_MESSAGE);
+        }
+        register_button.innerHTML = REGISTER_BUTTON_MESSAGE_NORMAL;
     }
 }

@@ -1,7 +1,7 @@
-import header_template from "./header-template.js"
-import load_header from "../util/header-loader.js"
-import * as storage from "../util/local-storage-key-data.js"
-import map_loader from "./map.js"
+import header_template from "/javascripts/app/header-template.js"
+import map_loader from "/javascripts/app/map.js"
+import load_header from "/javascripts/util/header-loader.js"
+import * as storage from "/javascripts/util/local-storage-key-data.js"
 
 window.addEventListener('load', () => {
     //Verify Authorization

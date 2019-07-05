@@ -1,4 +1,4 @@
-import { CADO_API_URL } from "../util/api.js";
+import { CADO_API_URL } from "/javascripts/util/api.js";
 
 export function create_project(title, token, callback = ()=>{}){
 

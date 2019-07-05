@@ -1,6 +1,6 @@
-import header_template from "../home/main-header-template.js"
-import load_header from "../util/header-loader.js"
-import login from "./login-service.js"
+import header_template from "/javascripts/home/main-header-template.js"
+import login from "/javascripts/home/login/login-service.js"
+import load_header from "/javascripts/util/header-loader.js"
 
 window.addEventListener('load', function () {
     //Add header on to the home page of cado web site
@@ -10,16 +10,7 @@ window.addEventListener('load', function () {
         //Perform login
         const user = getAuthInformation();
         if (verifyInformationIntegrity(user)) {
-            login(user.username, user.password, (data)=> {
-                if(data.status === 401){
-                    inputError('username', "Ce nom d'utilisateur n'est pas reconnu");
-                    e.target.innerHTML = 'Connexion';
-
-                } else if(data.status === 403){
-                    inputError('password', "Mode de passe incorrecte");
-                    e.target.innerHTML = 'Connexion';
-                }
-            });
+            login(user.username, user.password, (data) => onLoginResponse(data, e));
         }
     });
     //Remove invalide input after change
@@ -65,5 +56,16 @@ function removeInvalideInput() {
             inputs[i].classList.remove('invalide-input');
             document.querySelector('label[for=' + inputs[i].id + ']').innerHTML = '';
         });
+    }
+}
+
+function onLoginResponse(data, event){
+    if(data.status === 401){
+        inputError('username', "Ce nom d'utilisateur n'est pas reconnu");
+        event.target.innerHTML = 'Connexion';
+
+    } else if(data.status === 403){
+        inputError('password', "Mode de passe incorrecte");
+        event.target.innerHTML = 'Connexion';
     }
 }

@@ -1,5 +1,5 @@
-import { CADO_API_URL } from "../util/api.js"
-import { KEY_AUTHENTIFICATION_TOKEN } from "../util/local-storage-key-data.js"
+import { CADO_API_URL } from "/javascripts/util/api.js"
+import { KEY_AUTHENTIFICATION_TOKEN } from "/javascripts/util/local-storage-key-data.js"
 
 export default function login(user, password, callback = ()=>{}) {
     fetch(CADO_API_URL + '/api/auth', {
@@ -14,7 +14,7 @@ export default function login(user, password, callback = ()=>{}) {
         callback(data);
         if(data.status === 200){
             window.localStorage.setItem(KEY_AUTHENTIFICATION_TOKEN, data.token);
-            window.location = "app-home.html";
+            window.location = "/views/app-pages/app-home.html";
         }
     });
 }

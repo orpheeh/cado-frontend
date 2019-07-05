@@ -1,4 +1,4 @@
-import { CADO_API_URL } from "../util/api.js"
+import { CADO_API_URL } from "../../util/api.js"
 
 export default function register(username, email, password, callback = ()=>{}) {
 

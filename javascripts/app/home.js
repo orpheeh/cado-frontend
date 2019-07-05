@@ -1,10 +1,11 @@
-import header_template from "./header-template.js"
-import load_header from "../util/header-loader.js"
-import { CADO_API_URL } from "../util/api.js"
-import * as storage from "../util/local-storage-key-data.js"
-import astuce from "./home-astuce-template.js"
-import create_project_modal from "./create-project-modal.js"
-import { create_project, get_all_projects } from "./project.js"
+import astuce from "/javascripts/app/home-astuce-template.js"
+import create_project_modal from "/javascripts/app/create-project-modal.js"
+import { create_project, get_all_projects } from "/javascripts/app/project.js"
+import header_template from "/javascripts/app/header-template.js"
+import load_header from "/javascripts/util/header-loader.js"
+import { CADO_API_URL } from "/javascripts/util/api.js"
+import * as storage from "/javascripts/util/local-storage-key-data.js"
+import { toDoOnWindowsLoad, toDoOnWindowsClick } from "/javascripts/app/header-bar.js"
 
 window.addEventListener('load', function () {
     //Verify Authorization
@@ -18,10 +19,10 @@ window.addEventListener('load', function () {
 
     //Get my information from server
     getUserInfo();
-    
+
     //Load UI
     appHomeNavActionPerform();
-    
+
     //load Astuces on Home
     //Show astuce
     const a = astuce('http://www.openstreetmap.fr/wp-content/uploads/2019/02/teamwork-puzzle-map-v03-300x176.png',
@@ -29,22 +30,23 @@ window.addEventListener('load', function () {
         "OpenStreetMap est un projet cartographique, en ligne et mondial. Chacun peut l'actualiser ou l'améliorer. C'est l'équivalent de Wikipedia pour les cartes"
     );
     this.document.querySelector('.home').appendChild(a);
-    //Add project modal
+
+    //Add modal from use for create new project
     const cp = create_project_modal();
     cp.addEventListener('click', (e) => {
         if (e.target.classList.contains('modal')) {
             cp.classList.remove('display-modal');
         }
     });
-
     cp.querySelector('.close-modal').onclick = () => cp.classList.remove('display-modal');
     this.document.querySelector('.modal-container').appendChild(cp);
+
     //Show create project modal after click on app-new-button
     this.document.querySelector('.app-new-button').addEventListener('click', () => {
         cp.classList.add('display-modal');
     });
 
-    //Perform on change listener of project-title
+    //Perform on change listener of project-title on create-project-modal
     this.document.getElementById('project-title').addEventListener('keydown', (e) => {
         this.console.log('key down');
         if (e.target.value.length === 1) {
@@ -54,7 +56,7 @@ window.addEventListener('load', function () {
         }
     });
 
-    //Create project
+    //Perform action create project on click of create-new-project-button
     this.document.getElementById('create-new-project-button').addEventListener('click', (e) => {
         if (!e.target.classList.contains('inactive')) {
             create_project(this.document.getElementById('project-title').value,
@@ -76,33 +78,12 @@ window.addEventListener('load', function () {
         this.window.localStorage.getItem(storage.KEY_AUTHENTIFICATION_TOKEN),
         loadAllProject);
 
-    //Logout
-    this.document.getElementById('logout-button').addEventListener('click', () => {
-        this.window.localStorage.removeItem(storage.KEY_AUTHENTIFICATION_TOKEN);
-        this.window.localStorage.removeItem(storage.KEY_USER_ID);
-        this.window.localStorage.removeItem(storage.KEY_USER_EMAIL);
-        this.window.localStorage.removeItem(storage.KEY_USER_USERNAME);
-        this.window.localStorage.removeItem(storage.KEY_USER_PROJECT_ID);
-        this.window.localStorage.removeItem(storage.KEY_USER_PROJECT_TITLE);
-        this.window.localStorage.removeItem(storage.KEY_USER_PROJECT_DESCRIPTION);
-        this.window.location = "../index.html";
-    });
+    //Header bar action on load
+    toDoOnWindowsLoad();
 
-    //Show dropdown profil
-    this.document.getElementById('username').onclick = ()=> {
-        this.document.querySelector('#profil-dd').classList.add('dd-active');
-    }
-
-});
-
-//Close all dropdown
-window.addEventListener('click', (e) => {
-    const dds = document.querySelectorAll('.dd');
-    dds.forEach((dd) => {
-        const id = dd.classList[0].split('dd-parent-')[1];
-        if(e.target.id.toString() !== id){
-            dd.classList.remove('dd-active');
-        }
+    window.addEventListener('click', (e) => {
+        //Header bar action on click
+        toDoOnWindowsClick(e);
     });
 });
 
@@ -126,7 +107,6 @@ function getUserInfo() {
 
 function appHomeNavActionPerform() {
     const navItems = document.querySelectorAll('.app-left-nav .app-home-left-nav-button');
-
     for (let i = 0; i < navItems.length; i++) {
         navItems[i].addEventListener('click', () => {
             navItems.forEach((item) => item.classList.remove('app-home-left-nav-button-active'));
