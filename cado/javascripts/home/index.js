@@ -6,7 +6,7 @@ window.addEventListener('load', function(){
     
     //Verify if user are authenticate
     if(this.window.localStorage.getItem(storage.KEY_AUTHENTIFICATION_TOKEN) !== null){
-        this.window.location ="/views/app-pages/app-home.html";
+        this.window.location ="/cado/views/app-pages/app-home.html";
     }
 
     //Add header on to the home page of cado web site
