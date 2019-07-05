@@ -48,3 +48,17 @@ header div {
 .header-content a {
     margin-top: 20px;
 }
+
+@media screen and (max-width: 512px) {
+    .header-content {
+        padding: 10px;
+    }
+
+    .header-content h1 {
+        font-size: 24px;
+    }
+
+    .header-content h2 {
+        font-size: 14px;
+    }
+}

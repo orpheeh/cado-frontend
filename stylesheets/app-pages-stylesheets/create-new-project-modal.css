@@ -78,3 +78,9 @@
         transform: translate(50%, 0px);
     }
 }
+
+@media screen and (max-width: 512px) {
+    .modal-form-2 {
+        transform: translateX(0px);
+    }
+}

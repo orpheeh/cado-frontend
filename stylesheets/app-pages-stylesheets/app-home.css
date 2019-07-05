@@ -98,3 +98,10 @@
 .display-modal {
     display: block;
 }
+
+@media screen and (max-width: 512px) {
+
+    .app-left-nav {
+        display: none;
+    }
+}

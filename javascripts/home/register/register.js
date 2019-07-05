@@ -25,17 +25,27 @@ window.addEventListener('load', () => {
             verifyPasswordMatch(user.password, user.password_conf)) {
             //Register
             register_button.innerHTML = REGISTER_BUTTON_MESSAGE_REGISTER;
-            register(user.username, user.email, user.password, 
+            register(user.username, user.email, user.password,
                 (data) => onRegisterRequestResponse(data, user));
         }
     });
-    
+
     //Remove invalid invalid input style on user informations form field
     removeInvalideInput();
+
+    //Only Little screen
+    document.getElementById('humberger').onclick = () => {
+        const navItem = document.querySelectorAll('.nav-bar-item');
+        navItem.forEach(element => {
+            if (!element.classList.contains('little-media-only')) {
+                element.classList.toggle('nav-item-show');
+            }
+        });
+    }
 });
 
 function verifyPasswordMatch(pass1, pass2) {
-    if(pass1 !== pass2){
+    if (pass1 !== pass2) {
         inputError('password_conf', "Oups! Ce mot de passe est différent du précédent");
     }
     return pass1 === pass2;

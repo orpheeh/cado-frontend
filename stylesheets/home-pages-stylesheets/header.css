@@ -12,7 +12,6 @@
 header .h-content {
     display: grid;
     grid-template-columns: auto auto;
-    height: 90px;
     width: 100%;
     background-color: #ffffff;
 }
@@ -48,4 +47,34 @@ header .h-content {
     background: #2bbd7e;
     padding: 15px 20px;
     border-radius: 30px;
+}
+
+.little-media-only {
+    display: none;
+}
+
+@media screen and (max-width: 720px) {
+
+    .nav-bar-item {
+        font-size: 14px;
+        background-color: white;
+        display: none;
+    }
+
+    .little-media-only {
+        display: block;
+    }
+
+    .nav-item-show {
+        display: block;
+    }
+
+    .logo {
+        width: 120px;
+    }
+
+    .nav-bar {
+        display: grid;
+        grid-template-columns: auto;
+    }
 }

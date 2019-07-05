@@ -11,4 +11,14 @@ window.addEventListener('load', function(){
 
     //Add header on to the home page of cado web site
     load_header(header_template());
+
+    //Only Little screen
+    this.document.getElementById('humberger').onclick = () => {
+        const navItem = this.document.querySelectorAll('.nav-bar-item');
+        navItem.forEach(element => {
+            if(!element.classList.contains('little-media-only')){
+                element.classList.toggle('nav-item-show');
+            }
+        });
+    }
 });

@@ -75,3 +75,18 @@ input:focus, input:active {
     font-size: 11px;
     font-weight: bold;
 }
+
+@media screen and (max-width: 512px) {
+    .form-1-item-button {
+        width: 100%;
+    }
+
+    .form-1-item {
+        width: 100%;
+    }
+
+    .contrat {
+        width: 100%;
+        padding: 10px;
+    }
+}
