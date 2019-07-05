@@ -2,6 +2,7 @@ import header_template from "/cado/javascripts/app/header-template.js"
 import map_loader from "/cado/javascripts/app/map.js"
 import load_header from "/cado/javascripts/util/header-loader.js"
 import * as storage from "/cado/javascripts/util/local-storage-key-data.js"
+import { toDoOnWindowsLoad, toDoOnWindowsClick } from "/cado/javascripts/app/header-bar.js"
 
 window.addEventListener('load', () => {
     //Verify Authorization
@@ -22,6 +23,14 @@ window.addEventListener('load', () => {
 
     //Show map
     map_loader('map-view-id');
+
+    //Header bar action on load
+    toDoOnWindowsLoad();
+
+    window.addEventListener('click', (e) => {
+        //Header bar action on click
+        toDoOnWindowsClick(e);
+    });
 });
 
 function setTitle(title) {
