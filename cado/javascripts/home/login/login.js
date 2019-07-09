@@ -13,8 +13,19 @@ window.addEventListener('load', function () {
             login(user.username, user.password, (data) => onLoginResponse(data, e));
         }
     });
+    
     //Remove invalide input after change
     removeInvalideInput();
+
+    //Only Little screen
+    document.getElementById('humberger').onclick = () => {
+        const navItem = document.querySelectorAll('.nav-bar-item');
+        navItem.forEach(element => {
+            if (!element.classList.contains('little-media-only')) {
+                element.classList.toggle('nav-item-show');
+            }
+        });
+    }
 });
 
 function verifyInformationIntegrity(user) {
@@ -27,7 +38,7 @@ function verifyInformationIntegrity(user) {
         inputError('password', 'Vous devez remplir ce champ');
         result = false;
     }
-    if(result === false){
+    if (result === false) {
         document.getElementById('login-btn').innerHTML = 'Connexion';
     }
     return result;
@@ -59,12 +70,12 @@ function removeInvalideInput() {
     }
 }
 
-function onLoginResponse(data, event){
-    if(data.status === 401){
+function onLoginResponse(data, event) {
+    if (data.status === 401) {
         inputError('username', "Ce nom d'utilisateur n'est pas reconnu");
         event.target.innerHTML = 'Connexion';
 
-    } else if(data.status === 403){
+    } else if (data.status === 403) {
         inputError('password', "Mode de passe incorrecte");
         event.target.innerHTML = 'Connexion';
     }

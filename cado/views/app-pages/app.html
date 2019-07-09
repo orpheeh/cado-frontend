@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,20 +8,28 @@
 
     <!-- Leaflet css -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin=""/>
-    <!-- Fontawsome -->
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+
+    <!-- Fontawsome -->
+    <link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all">
+    <link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css"
+        media="all">
+
     <!-- My css -->
     <link rel="stylesheet" href="/cado/stylesheets/app-pages-stylesheets/app-header.css">
     <link rel="stylesheet" href="/cado/stylesheets/app-pages-stylesheets/app.css">
 
-    <link rel="shortcut icon" href="/images/cado-shortcut.png">
+    <link rel="shortcut icon" href="/cado/images/cado-shortcut.png">
 
     <title>Nom du projet | CADO</title>
 </head>
+
 <body>
-    
+
     <header></header>
 
     <div class="app-main-container">
@@ -28,11 +37,30 @@
         <!-- Transparent menu bar fixed on top of the app -->
         <div class="app-top-menu-bar">
 
-            <!-- Project title -->
-            <div class="project-title link-and-input">
-                <a href="#" class="change-to-input">Nom du projet</a>
-                <input type="text" class="change-to-link"/>
+            <div class="left-menu">
+                <!-- Project title -->
+                <a href="#" id="project-title" class="link">Nom du projet</a>
+
+                <span class="header-link-gap"></span>
+
+                <!-- Zone edit button -->
+                <a href="#" class="link" id="z-edit-button">
+                    <li class="fa fa-draw-polygon"></li> Zone
+                </a>
+
+                <span class="header-link-gap"></span>
+
+                <!-- Mobile control zone -->
+                <a href="#" class="link" id="z-edit-button">
+                    <li class="fa fa-mobile-alt"></li> Mobiles
+                </a>
+
             </div>
+
+            <!-- Nominatim Search bar -->
+            <input type="text" class="header-input" name="search-long-lat" id="search-lt-lg"
+                placeholder="Recherche: Pays, Province, Ville, ..." />
+
         </div>
 
         <!-- Map container -->
@@ -41,15 +69,25 @@
 
     </div>
 
-    <script src="https://kit.fontawesome.com/3db51e4e80.js"></script>
+    <div class="fixed-menu zone-menu">
+        <!-- Zone edit button -->
+        <a href="#" class="link title">
+            <li class="fa fa-draw-polygon"></li>
+            Modifier la zone de travail
+            <span class="close-fixed-menu">&times;</span>
+        </a>
+        <a href="#" class="link" id="z-rm-last-pt">Retirer le dernier point</a>
+    </div>
+
     <!-- Leaflet javascript after leaflet css -->
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-    crossorigin=""></script>
+        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+        crossorigin=""></script>
 
     <!-- My Javascript -->
     <script src="/cado/javascripts/app/header-bar.js"></script>
     <script src="/cado/javascripts/app/app.js" type="module"></script>
 
 </body>
+
 </html>

@@ -3,8 +3,8 @@ import register from "/cado/javascripts/home/register/register-service.js"
 import login from "/cado/javascripts/home/login/login-service.js"
 import load_header from "/cado/javascripts/util/header-loader.js"
 
-const REGISTER_BUTTON_MESSAGE_LOGIN = '<i class="fa fa-spinner fa-spin"></i> Connexion en cours';
-const REGISTER_BUTTON_MESSAGE_REGISTER = '<i class="fa fa-spinner fa-spin></i> Inscription en cours';
+const REGISTER_BUTTON_MESSAGE_LOGIN = '<li class="fa fa-spinner fa-spin"></li> Connexion en cours';
+const REGISTER_BUTTON_MESSAGE_REGISTER = '<li class="fa fa-spinner fa-spin></li> Inscription en cours';
 const REGISTER_BUTTON_MESSAGE_NORMAL = "Je m' inscris";
 
 const EMAIL_EXIST_MESSAGE = "'Cette E-mail existe déjà";
@@ -111,7 +111,12 @@ function onRegisterRequestResponse(data, user) {
         }
         register_button.innerHTML = REGISTER_BUTTON_MESSAGE_NORMAL;
     } else {
+
+        //TODO remove it
         console.log('Server error');
         console.log(data);
+        register_button.innerHTML = 'Oups! Erreur, contactez Orphée';
+        register_button.style.color = 'red';
+        register_button.style.backgroundColor = 'white';
     }
 }

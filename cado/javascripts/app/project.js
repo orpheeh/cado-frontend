@@ -22,7 +22,7 @@ export function create_project(title, token, callback = ()=>{}){
 }
 
 export function get_all_projects(token, callback = ()=>{}){
-    fetch(CADO_API_URL + '/api/project', {
+    fetch(CADO_API_URL + '/api/projects', {
         method: 'get',
         headers: new Headers([
             ['Content-Type', 'application/json'],
@@ -31,4 +31,17 @@ export function get_all_projects(token, callback = ()=>{}){
     .then((data)=>{
         callback(data);
     });
+}
+
+export function find_project(pid, token, callback = () => {}) {
+    fetch(CADO_API_URL + '/api/project/' + pid, {
+        method: 'get',
+        headers: new Headers({
+            'authorization': token
+        }),
+    }).then(response => response.json())
+        .then((data) => {
+            console.log(data);
+            callback(data);
+        });
 }

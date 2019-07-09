@@ -89,4 +89,18 @@ input:focus, input:active {
         width: 100%;
         padding: 10px;
     }
+
+    .main h1 {
+        font-size: 16px;
+        margin: 5px;
+    }
+
+    .main .question {
+        margin: 5px;
+        padding: 5px;
+    }
+
+    .form-1 {
+        grid-gap: 15px;
+    }
 }

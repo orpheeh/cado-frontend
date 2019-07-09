@@ -13,6 +13,9 @@
     width: 100%;
     height: 48px;
     background-color: #43a047;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 5px;
 }
 
 .link-and-input input{
@@ -22,14 +25,87 @@
 .link-and-input a {
     text-decoration: none;
     color: white;
-    font-weight: bold;
     font-size: 14px;
-    padding: 11px 10px;
-    margin: 2px;
+    display: inline-block;
+}
+
+.link-and-input {
     display: inline-block;
 }
 
 .link-and-input a:hover {
     background-color: #228527;
     border-radius: 5px;
+}
+
+.header-input {
+    margin: 4px;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    background: white;
+    font-weight: bold;
+}
+
+.header-input-loading {
+    background: white url(http://www.xiconeditor.com/image/icons/loading.gif) no-repeat right center;
+}
+
+.header-input:focus {
+    outline: none;
+}
+
+.left-menu .link {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    padding: 8px 20px;
+    margin: 4px 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.left-menu .link:hover {
+    background-color: #228527;
+    border-radius: 4px;
+}
+
+.header-link-gap {
+    border: 1px solid white;
+}
+
+.fixed-menu {
+    position: fixed;
+    top: 100px;
+    right: 0px;
+    width: 30vw;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1555;
+    display: none;
+    animation: move-right-to-left 0.4s;
+}
+
+.fixed-menu .link {
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px;
+    display: block;
+}
+
+.fixed-menu .title {
+    background-color: #43a047;
+    text-decoration: none;
+    display: grid;
+    font-weight: normal;
+    grid-template-columns: 30px auto 30px;
+}
+
+.close-fixed-menu {
+    font-size: 24px;
+}
+
+@keyframes move-right-to-left {
+    0% { transform: translateX(100%)}
+    100% { transform: translateX(0%)}
 }
