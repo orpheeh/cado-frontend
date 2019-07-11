@@ -4,7 +4,7 @@ import load_header from "/cado/javascripts/util/header-loader.js"
 import * as storage from "/cado/javascripts/util/local-storage-key-data.js"
 import { CADO_API_URL } from "/cado/javascripts/util/api.js"
 import { toDoOnWindowsLoad, toDoOnWindowsClick } from "/cado/javascripts/app/header-bar.js"
-import { find_project } from "/cado/javascripts/app/project.js"
+import { find_project, create_mobile_app } from "/cado/javascripts/app/project.js"
 
 window.addEventListener('load', () => {
     //Verify Authorization
@@ -29,9 +29,17 @@ window.addEventListener('load', () => {
         window.localStorage.getItem(storage.KEY_AUTHENTIFICATION_TOKEN),
         (data) => {
             if (data.status === 200) {
+                console.log(data);
                 const p = loadZone(data.project);
                 //Show map
                 _map = new Map('map-view-id', p);
+                //Load mobiles
+                const list = document.querySelector('.mobile-list');
+                data.project.mobiles.apps.forEach(e => {
+                    const li = document.createElement('li');
+                    li.innerHTML = 'P' + data.project.pid + 'M' + e.mid;
+                    list.appendChild(li);
+                });
             }
         });
 
@@ -52,22 +60,44 @@ window.addEventListener('load', () => {
         }
     });
 
-    //Actived zone edit
+    //Actived zone edit menu
     document.getElementById('z-edit-button').addEventListener('click', () => {
+        closeAllFixedMenu();
         const zone_menu = document.querySelector('.zone-menu');
         zone_menu.style.display = "block";
         _map.startDraw();
     });
 
-    //Desactived zone edit
+    //Desactived zone edit menu
     document.querySelector('.zone-menu .title').onclick = () => {
-        const zone_menu = document.querySelector('.zone-menu');
-        zone_menu.style.display = "none";
+        closeAllFixedMenu();
         _map.stopDraw();
     }
 
+    //Actived mobile menu
+    document.getElementById('z-mobile-button').addEventListener('click', () => {
+        closeAllFixedMenu();
+        const mobile_menu = document.querySelector('.mobile-menu');
+        mobile_menu.style.display = "block";
+    });
+
+    //Desactived mobile menu
+    document.querySelector('.mobile-menu .title').onclick = () => closeAllFixedMenu();
+
     //Remove last point on polygon zone
     document.getElementById('z-rm-last-pt').onclick = () => _map.removeLastPolygonsPoint();
+
+    //Create mobile app
+    document.getElementById('z-create_mob').onclick = () => create_mobile_app(
+        window.localStorage.getItem(storage.KEY_AUTHENTIFICATION_TOKEN),
+        window.localStorage.getItem(storage.KEY_USER_PROJECT_ID),
+        (data) => {
+            if(data.status === 200){
+                const li = document.createElement('li');
+                li.innerHTML = 'P' + data.update.pid + 'M' + data.update.mobiles.counter;
+                document.querySelector('.mobile-list').appendChild(li);
+            }
+        });
 
     //Header bar action on load
     toDoOnWindowsLoad();
@@ -89,4 +119,11 @@ function loadZone(data) {
         p.push([element.lat, element.lng]);
     });
     return p;
+}
+
+function closeAllFixedMenu() {
+    const fms = document.querySelectorAll('.fixed-menu');
+    fms.forEach(fm => {
+        fm.style.display = "none";
+    });
 }

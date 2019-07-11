@@ -79,30 +79,39 @@
     top: 100px;
     right: 0px;
     width: 30vw;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(255, 255, 255, 0.8);
     z-index: 1555;
     display: none;
     animation: move-right-to-left 0.4s;
 }
 
 .fixed-menu .link {
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
+    color: #43a047;
+    text-decoration: none;
+    font-size: 14px;
     padding: 10px;
     display: block;
 }
 
 .fixed-menu .title {
-    background-color: #43a047;
+    background-color: #228527;
+    color: white;
     text-decoration: none;
     display: grid;
     font-weight: normal;
+    font-size: 16px;
     grid-template-columns: 30px auto 30px;
 }
 
 .close-fixed-menu {
     font-size: 24px;
+}
+
+.mobile-list {
+    color: #777777;
+    font-size: 14px;
+    padding: 20px;
+    padding-left: 30px; 
 }
 
 @keyframes move-right-to-left {

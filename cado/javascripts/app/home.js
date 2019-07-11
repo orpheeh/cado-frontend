@@ -92,7 +92,7 @@ function getUserInfo() {
         method: 'get',
         headers: new Headers({
             'Content-Type': 'application/json',
-            'Authorization': window.localStorage.getItem(storage.KEY_AUTHENTIFICATION_TOKEN)
+            'Authorization': 'Access browser' + 'Bearer ' + window.localStorage.getItem(storage.KEY_AUTHENTIFICATION_TOKEN)
         }),
     }).then((response) => {
         return response.json();
