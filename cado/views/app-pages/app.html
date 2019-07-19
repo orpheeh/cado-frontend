@@ -22,6 +22,7 @@
     <!-- My css -->
     <link rel="stylesheet" href="/cado/stylesheets/app-pages-stylesheets/app-header.css">
     <link rel="stylesheet" href="/cado/stylesheets/app-pages-stylesheets/app.css">
+    <link rel="stylesheet" href="/cado/stylesheets/app-pages-stylesheets/template-style/marker-item-style.css">
 
     <link rel="shortcut icon" href="/cado/images/cado-shortcut.png">
 
@@ -55,6 +56,15 @@
                     <li class="fa fa-mobile-alt"></li> Mobiles
                 </a>
 
+                <span class="header-link-gap"></span>
+
+                <!-- Map management -->
+                <a href="#" class="link" id="z-map-manage-button">
+                    <li class="fa fa-map"></li> Map
+                </a>
+
+                <span class="header-link-gap"></span>
+
             </div>
 
             <!-- Nominatim Search bar -->
@@ -71,25 +81,38 @@
 
     <div class="fixed-menu zone-menu">
         <!-- Zone edit button -->
-        <a href="#" class="link title">
-            <li class="fa fa-draw-polygon"></li>
-            Modifier la zone de travail
+        <a href="#" class="title">
+            <i class="fa fa-draw-polygon"></i>
+            <p>Modifier la zone de travail</p>
             <span class="close-fixed-menu">&times;</span>
         </a>
         <a href="#" class="link" id="z-rm-last-pt">Retirer le dernier point</a>
     </div>
 
     <div class="fixed-menu mobile-menu">
-        <!-- Zone edit button -->
-        <a href="#" class="link title">
-            <li class="fa fa-mobile-alt"></li>
-            Application mobile CADO
+        <!-- Mobile management -->
+        <a href="#" class="title">
+            <i class="fa fa-mobile-alt"></i>
+            <p>CADO Mobiles</p>
             <span class="close-fixed-menu">&times;</span>
         </a>
         <a href="#" class="link" id="z-create_mob">Générer un code</a>
 
         <ul class="mobile-list">
         </ul>
+    </div>
+
+    <div class="fixed-menu map-menu">
+        <!-- Map content management -->
+        <a href="#" class="title">
+            <i class="fa fa-map"></i>
+            <p>Map</p>
+            <span class="close-fixed-menu">&times;</span>
+        </a>
+
+        <div class="markers-list">
+            
+        </div>
     </div>
 
     <!-- Leaflet javascript after leaflet css -->

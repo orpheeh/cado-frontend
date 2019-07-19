@@ -48,7 +48,6 @@ window.addEventListener('load', function () {
 
     //Perform on change listener of project-title on create-project-modal
     this.document.getElementById('project-title').addEventListener('keydown', (e) => {
-        this.console.log('key down');
         if (e.target.value.length === 1) {
             this.document.getElementById('create-new-project-button').classList.add('inactive');
         } else {

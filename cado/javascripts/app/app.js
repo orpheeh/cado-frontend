@@ -2,9 +2,9 @@ import header_template from "/cado/javascripts/app/header-template.js"
 import Map from "/cado/javascripts/app/map.js"
 import load_header from "/cado/javascripts/util/header-loader.js"
 import * as storage from "/cado/javascripts/util/local-storage-key-data.js"
-import { CADO_API_URL } from "/cado/javascripts/util/api.js"
 import { toDoOnWindowsLoad, toDoOnWindowsClick } from "/cado/javascripts/app/header-bar.js"
 import { find_project, create_mobile_app } from "/cado/javascripts/app/project.js"
+import marker_template from "/cado/javascripts/app/template/marker-item-template.js"
 
 window.addEventListener('load', () => {
     //Verify Authorization
@@ -24,15 +24,18 @@ window.addEventListener('load', () => {
     setTitle(window.localStorage.getItem(storage.KEY_USER_PROJECT_TITLE));
 
     let _map = null;
+
     //load zone
     find_project(window.localStorage.getItem(storage.KEY_USER_PROJECT_ID),
         window.localStorage.getItem(storage.KEY_AUTHENTIFICATION_TOKEN),
         (data) => {
             if (data.status === 200) {
-                console.log(data);
-                const p = loadZone(data.project);
+                const polygon = loadZone(data.project);
+                const markers = loadMarker(data.project);
                 //Show map
-                _map = new Map('map-view-id', p);
+                _map = new Map('map-view-id', polygon, markers);
+                //Show markers view on right map menu
+                showMarker(markers, _map);
                 //Load mobiles
                 const list = document.querySelector('.mobile-list');
                 data.project.mobiles.apps.forEach(e => {
@@ -49,7 +52,6 @@ window.addEventListener('load', () => {
         if (e.keyCode === 13) {
             e.target.classList.add('header-input-loading');
             _map.searchLocation(e.target.value, (data) => {
-                console.log(data);
                 e.target.classList.remove('header-input-loading');
                 if (data[0] !== undefined) {
                     e.target.value = data[0].display_name;
@@ -79,10 +81,22 @@ window.addEventListener('load', () => {
         closeAllFixedMenu();
         const mobile_menu = document.querySelector('.mobile-menu');
         mobile_menu.style.display = "block";
+        _map.stopDraw();
     });
 
     //Desactived mobile menu
     document.querySelector('.mobile-menu .title').onclick = () => closeAllFixedMenu();
+
+    //Active Map manager menu
+    document.getElementById('z-map-manage-button').addEventListener('click', () => {
+        closeAllFixedMenu();
+        const map_menu = document.querySelector('.map-menu');
+        map_menu.style.display = "block";
+        _map.stopDraw();
+    });
+
+    //Desactived map menu
+    document.querySelector('.map-menu .title').onclick = () => closeAllFixedMenu();
 
     //Remove last point on polygon zone
     document.getElementById('z-rm-last-pt').onclick = () => _map.removeLastPolygonsPoint();
@@ -92,7 +106,7 @@ window.addEventListener('load', () => {
         window.localStorage.getItem(storage.KEY_AUTHENTIFICATION_TOKEN),
         window.localStorage.getItem(storage.KEY_USER_PROJECT_ID),
         (data) => {
-            if(data.status === 200){
+            if (data.status === 200) {
                 const li = document.createElement('li');
                 li.innerHTML = 'P' + data.update.pid + 'M' + data.update.mobiles.counter;
                 document.querySelector('.mobile-list').appendChild(li);
@@ -113,12 +127,29 @@ function setTitle(title) {
     document.querySelector('head title').innerHTML = title + ' | CADO';
 }
 
-function loadZone(data) {
-    let p = [];
-    data.zone.forEach(element => {
-        p.push([element.lat, element.lng]);
+function loadZone(project) {
+    let polygon = [];
+    project.zone.forEach(element => {
+        polygon.push([element.lat, element.lng]);
     });
-    return p;
+    return polygon;
+}
+
+function loadMarker(project) {
+    let markers = [];
+    project.markers.forEach(marker => {
+        markers.push({ latlng: [marker.lat, marker.lng], popup: "<b>" + marker.title + "</b><br/>" + marker.details, _id: marker._id, title: marker.title, details: marker.details });
+    });
+
+    return markers;
+}
+
+function showMarker(markers, map) {
+    const marker_list_html = document.querySelector('.markers-list');
+    for(let i = 0; i < markers.length; i++) {
+        const marker = markers[i];
+        marker_list_html.appendChild(marker_template(marker.title, marker.details, marker.latlng[0], marker.latlng[1], marker._id, map, i));
+    }
 }
 
 function closeAllFixedMenu() {

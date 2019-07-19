@@ -4,10 +4,10 @@ export default () => `
 
             <div class="project-header-menu-1 grid-item">
                 <a href="#" class="h-home link">
-                    <li class="fa fa-home"></li>
+                    <i class="fa fa-home"></i>
                 </a>
                 <a href="#" class="h-project link">
-                    <li class="fa fa-project-diagram"></li> Projets
+                    <i class="fa fa-project-diagram"></i> Projets
                 </a>
             </div>
 
@@ -17,10 +17,10 @@ export default () => `
 
             <div class="project-header-menu-2 grid-item">
                 <a href="#" class="link">
-                    <li class="fa fa-plus"></li>
+                    <i class="fa fa-plus"></i>
                 </a>
                 <a href="#" class="link">
-                    <li class="fa fa-info-circle"></li>
+                    <i class="fa fa-info-circle"></i>
                 </a>
                 <span id="username" class="dd-r-button">
                     M

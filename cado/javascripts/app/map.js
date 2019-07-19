@@ -4,13 +4,28 @@ import { CADO_API_URL } from "/cado/javascripts/util/api.js"
 
 export default class Map {
 
-    constructor(mapid, polygon = [], center = [0.42185, 9.4450316], zoom = 19) {
+    constructor(mapid, polygon = [], markers = [], center = [0.42185, 9.4450316], zoom = 19) {
         this._draw = 'no';
+        if(polygon.length > 0){
+            center = polygon[0];
+        }
         this._osm = L.map(mapid).setView(center, zoom);
         this._polygon = polygon;
+        this.markers = markers;
+        this.marker_list = [];
         this.last_polygon = null;
         
         this.createPolygon();
+
+        markers.forEach(markerInfo => {
+            const marker = L.marker(markerInfo.latlng).addTo(this._osm);
+            marker.bindPopup(markerInfo.popup).openPopup();
+            this.marker_list.push(marker);
+        });
+
+        if(this._polygon.length > 0){
+            this.centerMapTo(this._polygon[0][0], this._polygon[0][1]);
+        }
 
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
@@ -38,6 +53,14 @@ export default class Map {
                 callback(data);
             })
             .catch((error) => console.log(error));
+    }
+
+    centerMapTo(lat, lng){
+        this._osm.panTo(new L.LatLng(lat, lng));
+    }
+
+    removeMarker(index){
+        this._osm.removeLayer(this.marker_list[index]);
     }
 
     startDraw() {
@@ -70,7 +93,7 @@ export default class Map {
             method: 'post',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'authorization': window.localStorage.getItem(st.KEY_AUTHENTIFICATION_TOKEN)
+                'authorization':  'Access browserBearer ' + window.localStorage.getItem(st.KEY_AUTHENTIFICATION_TOKEN)
             }),
             body: JSON.stringify({ lat, lng, action,
                 pid: window.localStorage.getItem(st.KEY_USER_PROJECT_ID) })
@@ -79,7 +102,6 @@ export default class Map {
             console.log(data);
         });
     }
-
 }
 
 /**

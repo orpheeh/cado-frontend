@@ -1,0 +1,42 @@
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.marker-item {
+    padding: 5px 20px;
+    margin: 10px;
+}
+
+.marker-item:hover {
+    cursor: pointer;
+    background-color: #acbdb1;
+    border-radius: 5px;
+}
+
+.marker-item h1 {
+    display: flex;
+    font-size: 14px;
+}
+
+.delete-marker {
+    flex: 1;
+    font-size: 24px;
+    color: white;
+}
+
+.marker-item-title {
+    flex: 20;
+}
+
+.marker-item-details {
+    font-size: 12px;
+    font-weight: bold;
+    color: #555555;
+}
+
+.marker-item h2 {
+    font-size: 11px;
+    color: #777777;
+}

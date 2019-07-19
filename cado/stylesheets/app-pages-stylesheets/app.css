@@ -62,7 +62,6 @@
     padding: 8px 20px;
     margin: 4px 10px;
     font-size: 16px;
-    font-weight: bold;
 }
 
 .left-menu .link:hover {
@@ -78,7 +77,7 @@
     position: fixed;
     top: 100px;
     right: 0px;
-    width: 30vw;
+    width: 40vw;
     background-color: rgba(255, 255, 255, 0.8);
     z-index: 1555;
     display: none;
@@ -86,25 +85,47 @@
 }
 
 .fixed-menu .link {
-    color: #43a047;
+    color: black;
     text-decoration: none;
     font-size: 14px;
+    font-weight: bold;
     padding: 10px;
     display: block;
+    margin: 10px;
+}
+
+.fixed-menu .link:hover {
+    background-color: #cccccc;
+    border-radius: 5px;
 }
 
 .fixed-menu .title {
-    background-color: #228527;
+    background-color: #43a047;
     color: white;
     text-decoration: none;
     display: grid;
     font-weight: normal;
     font-size: 16px;
+    padding: 10px;
     grid-template-columns: 30px auto 30px;
+    display: flex;
+    align-items: center;
 }
 
 .close-fixed-menu {
-    font-size: 24px;
+    font-size: 32px;
+    flex: 0.5;
+    flex-shrink: 10;
+}
+
+.fixed-menu .title i {
+    flex: 0.5;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.fixed-menu .title p {
+    flex: 9;
 }
 
 .mobile-list {

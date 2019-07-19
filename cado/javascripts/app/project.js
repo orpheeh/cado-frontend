@@ -13,7 +13,6 @@ export function create_project(title, token, callback = () => { }) {
     }).then((response) => response.json())
         .then((data) => {
             //callback
-            console.log(data);
             callback(data);
         })
         .catch((error) => {
@@ -34,7 +33,6 @@ export function get_all_projects(token, callback = () => { }) {
 }
 
 export function create_mobile_app(token, pid, callback = () => { }) {
-    console.log(pid);
     fetch(CADO_API_URL + '/api/mobile', {
         method: 'post',
         headers: new Headers([
@@ -43,11 +41,9 @@ export function create_mobile_app(token, pid, callback = () => { }) {
         body: JSON.stringify({ pid }),
     }).then((response) => response.json())
         .then((data) => {
-            console.log(data);
             callback(data);
         })
         .catch((error) => {
-            console.log('error: ' + error);
         });;
 }
 
@@ -59,7 +55,20 @@ export function find_project(pid, token, callback = () => { }) {
         }),
     }).then(response => response.json())
         .then((data) => {
-            console.log(data);
+            callback(data);
+        });
+}
+
+export function delete_marker(pid, marker_id, token, callback = () => { }) {
+    fetch(CADO_API_URL + '/api/mobile/marker', {
+        method: 'delete',
+        headers: new Headers({
+            'content-type': 'application/json',
+            'authorization': 'Access browserBearer ' + token
+        }),
+        body: JSON.stringify({ pid, marker_id }),
+    }).then(response => response.json())
+        .then((data) => {
             callback(data);
         });
 }
