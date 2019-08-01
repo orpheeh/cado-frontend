@@ -5,6 +5,8 @@ import * as storage from "/cado/javascripts/util/local-storage-key-data.js"
 import { toDoOnWindowsLoad, toDoOnWindowsClick } from "/cado/javascripts/app/header-bar.js"
 import { find_project, create_mobile_app } from "/cado/javascripts/app/project.js"
 import marker_template from "/cado/javascripts/app/template/marker-item-template.js"
+import { loadModal, loadTrashModal } from "/cado/javascripts/app/template/add-trash-modal-template.js"
+
 
 window.addEventListener('load', () => {
     //Verify Authorization
@@ -84,6 +86,23 @@ window.addEventListener('load', () => {
         _map.stopDraw();
     });
 
+    //Actived trash menu
+    document.getElementById('z-trash-manage-button').addEventListener('click', () => {
+        closeAllFixedMenu();
+        const trash_menu = document.querySelector('.trash-menu');
+        trash_menu.style.display = "block";
+        _map.stopDraw();
+    });
+
+    //Add trash button onClick
+    document.querySelector('.add-trash-button').addEventListener('click', () => {
+        const poubelle_type_container = document.querySelector('.poubelle-type-select');
+        loadTrashModal(window.localStorage.getItem(storage.KEY_AUTHENTIFICATION_TOKEN), poubelle_type_container);        
+    });
+
+    //Desactived trash menu
+    document.querySelector('.trash-menu .title').onclick = () => closeAllFixedMenu();
+
     //Desactived mobile menu
     document.querySelector('.mobile-menu .title').onclick = () => closeAllFixedMenu();
 
@@ -94,6 +113,27 @@ window.addEventListener('load', () => {
         map_menu.style.display = "block";
         _map.stopDraw();
     });
+
+    //Open Modal
+    document.getElementById('add-trash-button').onclick = () => {
+         document.querySelector('.add-trash-modal').style.display = "block";
+
+        const select_unit = document.querySelector('.trash-unit-select');
+        const poubelle_type_container = document.querySelector('.poubelle-type-select');
+        
+        while (poubelle_type_container.firstChild) {
+            poubelle_type_container.removeChild(poubelle_type_container.firstChild);
+        }
+         loadModal(window.localStorage.getItem(storage.KEY_AUTHENTIFICATION_TOKEN), select_unit, poubelle_type_container);
+    }
+
+    //Close modal
+    document.querySelector('.modal').onclick = (e) => {
+        console.log(e);
+        if(e.target.classList.contains('modal')){
+            document.querySelector('.modal').style.display = "none";
+        }
+    }
 
     //Desactived map menu
     document.querySelector('.map-menu .title').onclick = () => closeAllFixedMenu();
@@ -146,7 +186,7 @@ function loadMarker(project) {
 
 function showMarker(markers, map) {
     const marker_list_html = document.querySelector('.markers-list');
-    for(let i = 0; i < markers.length; i++) {
+    for (let i = 0; i < markers.length; i++) {
         const marker = markers[i];
         marker_list_html.appendChild(marker_template(marker.title, marker.details, marker.latlng[0], marker.latlng[1], marker._id, map, i));
     }

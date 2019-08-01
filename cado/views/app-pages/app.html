@@ -22,6 +22,7 @@
     <!-- My css -->
     <link rel="stylesheet" href="/cado/stylesheets/app-pages-stylesheets/app-header.css">
     <link rel="stylesheet" href="/cado/stylesheets/app-pages-stylesheets/app.css">
+    <link rel="stylesheet" href="/cado/stylesheets/app-pages-stylesheets/trash-modal.css">
     <link rel="stylesheet" href="/cado/stylesheets/app-pages-stylesheets/template-style/marker-item-style.css">
 
     <link rel="shortcut icon" href="/cado/images/cado-shortcut.png">
@@ -61,6 +62,12 @@
                 <!-- Map management -->
                 <a href="#" class="link" id="z-map-manage-button">
                     <li class="fa fa-map"></li> Map
+                </a>
+
+                <span class="header-link-gap"></span>
+
+                <a href="#" class="link" id="z-trash-manage-button">
+                    <li class="fa fa-trash"></li> Dispositifs
                 </a>
 
                 <span class="header-link-gap"></span>
@@ -111,7 +118,52 @@
         </a>
 
         <div class="markers-list">
-            
+
+        </div>
+    </div>
+
+    <div class="fixed-menu trash-menu">
+        <!-- Map content management -->
+        <a href="#" class="title">
+            <i class="fa fa-trash"></i>
+            <p>Dispositifs</p>
+            <span class="close-fixed-menu">&times;</span>
+        </a>
+
+        <a href="#" class="link" id="add-trash-button">Ajouter un dispositifs</a>
+
+        <div class="all-trash">
+
+        </div>
+
+    </div>
+
+    <div class="add-trash-modal modal">
+        <div class="modal-content">
+            <div class="poubelle">
+                <button class="add-trash-button">Ajouter une poubelle</button>
+                <div class="poubelle-type-select">
+                </div>
+            </div>
+
+            <div class="quantity">
+                <label for="">Unité: </label>
+                <select class="trash-unit-select">
+                </select>
+
+                <div>
+                    <label for="">Quantité: </label>
+                    <input type="number" placeholder="Quantité moyenne" />
+                </div>
+            </div>
+
+            <div class="description">
+                <h1>Description</h1>
+                <h2>3 poubelles</h2>
+                <h3>Papier, plastique, alluminium</h3>
+                <h4>Moyenne: 16 L</h4>
+            </div>
+            <button>Ajouter le dispositif</button>
         </div>
     </div>
 
