@@ -15,21 +15,25 @@
     background-color: white;
     padding: 20px;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto;
     margin-top: 60px;
     width: 50%;
     transform: translateX(50%);
 }
 
-.description * {
-    font-family: monospace;
+.quantity div {
+    margin-top: 20px;
+}
+
+input {
+    font-size: 14px;
 }
 
 .modal-content .poubelle, .description, .quantity {
     margin: 20px;
 }
 
-button {
+.add-trash-modal button {
     border: none;
     padding: 10px 20px;
     background-color: rgb(81, 167, 81);

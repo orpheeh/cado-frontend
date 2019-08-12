@@ -5,7 +5,7 @@ import * as storage from "/cado/javascripts/util/local-storage-key-data.js"
 import { toDoOnWindowsLoad, toDoOnWindowsClick } from "/cado/javascripts/app/header-bar.js"
 import { find_project, create_mobile_app } from "/cado/javascripts/app/project.js"
 import marker_template from "/cado/javascripts/app/template/marker-item-template.js"
-import { loadModal, loadTrashModal } from "/cado/javascripts/app/template/add-trash-modal-template.js"
+import { loadModal, loadTrashModal, createDispositif, displayTrash } from "/cado/javascripts/app/template/add-trash-modal-template.js"
 
 
 window.addEventListener('load', () => {
@@ -45,6 +45,8 @@ window.addEventListener('load', () => {
                     li.innerHTML = 'P' + data.project.pid + 'M' + e.mid;
                     list.appendChild(li);
                 });
+                displayTrash(window.localStorage.getItem(storage.KEY_AUTHENTIFICATION_TOKEN), all_trash, _map);
+
             }
         });
 
@@ -97,7 +99,7 @@ window.addEventListener('load', () => {
     //Add trash button onClick
     document.querySelector('.add-trash-button').addEventListener('click', () => {
         const poubelle_type_container = document.querySelector('.poubelle-type-select');
-        loadTrashModal(window.localStorage.getItem(storage.KEY_AUTHENTIFICATION_TOKEN), poubelle_type_container);        
+        loadTrashModal(window.localStorage.getItem(storage.KEY_AUTHENTIFICATION_TOKEN), poubelle_type_container);
     });
 
     //Desactived trash menu
@@ -116,23 +118,41 @@ window.addEventListener('load', () => {
 
     //Open Modal
     document.getElementById('add-trash-button').onclick = () => {
-         document.querySelector('.add-trash-modal').style.display = "block";
+        document.querySelector('.add-trash-modal').style.display = "block";
 
         const select_unit = document.querySelector('.trash-unit-select');
         const poubelle_type_container = document.querySelector('.poubelle-type-select');
-        
+
         while (poubelle_type_container.firstChild) {
             poubelle_type_container.removeChild(poubelle_type_container.firstChild);
         }
-         loadModal(window.localStorage.getItem(storage.KEY_AUTHENTIFICATION_TOKEN), select_unit, poubelle_type_container);
+        loadModal(window.localStorage.getItem(storage.KEY_AUTHENTIFICATION_TOKEN), select_unit, poubelle_type_container);
     }
 
     //Close modal
-    document.querySelector('.modal').onclick = (e) => {
-        console.log(e);
-        if(e.target.classList.contains('modal')){
-            document.querySelector('.modal').style.display = "none";
+    document.querySelectorAll('.modal').forEach((modal) => {
+        modal.onclick = function (e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
         }
+    });
+
+    //Ajouter un dispositif
+    document.querySelector('.button-add-dispositif').addEventListener('click', (e) => {
+        const select_unit = document.querySelector('.trash-unit-select');
+        const poubelle_type_container = document.querySelector('.poubelle-type-select');
+        createDispositif(window.localStorage.getItem(storage.KEY_AUTHENTIFICATION_TOKEN),
+            poubelle_type_container, select_unit,
+            document.querySelector('#dispo-name').value,
+            document.querySelector('.quantity-unit').value
+        );
+    });
+
+    //Show all dispositif
+    const all_trash = document.querySelector('.all-trash');
+    while (all_trash.firstChild) {
+        all_trash.removeChild(all_trash.firstChild);
     }
 
     //Desactived map menu

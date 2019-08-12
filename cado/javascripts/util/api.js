@@ -1,2 +1,2 @@
 
-export const CADO_API_URL = 'http://127.0.0.1:3002';
+export const CADO_API_URL = 'http://127.0.0.1:3000';

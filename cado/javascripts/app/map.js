@@ -6,7 +6,7 @@ export default class Map {
 
     constructor(mapid, polygon = [], markers = [], center = [0.42185, 9.4450316], zoom = 19) {
         this._draw = 'no';
-        if(polygon.length > 0){
+        if (polygon.length > 0) {
             center = polygon[0];
         }
         this._osm = L.map(mapid).setView(center, zoom);
@@ -14,7 +14,10 @@ export default class Map {
         this.markers = markers;
         this.marker_list = [];
         this.last_polygon = null;
-        
+
+        //Change dispositif location
+        this.dispositif = "none";
+
         this.createPolygon();
 
         markers.forEach(markerInfo => {
@@ -23,7 +26,7 @@ export default class Map {
             this.marker_list.push(marker);
         });
 
-        if(this._polygon.length > 0){
+        if (this._polygon.length > 0) {
             this.centerMapTo(this._polygon[0][0], this._polygon[0][1]);
         }
 
@@ -37,6 +40,10 @@ export default class Map {
                 this.sendPolygonToServer(e.latlng.lat, e.latlng.lng, 'add');
                 this._polygon.push([e.latlng.lat, e.latlng.lng]);
                 this.createPolygon();
+            }
+
+            if (this.dispositif !== "none") {
+                this.updateDispositifLocation(e.latlng.lat, e.latlng.lng);
             }
         });
     }
@@ -55,12 +62,16 @@ export default class Map {
             .catch((error) => console.log(error));
     }
 
-    centerMapTo(lat, lng){
+    centerMapTo(lat, lng) {
         this._osm.panTo(new L.LatLng(lat, lng));
     }
 
-    removeMarker(index){
+    removeMarker(index) {
         this._osm.removeLayer(this.marker_list[index]);
+    }
+
+    removeMarker2(marker) {
+        this._osm.removeLayer(marker);
     }
 
     startDraw() {
@@ -69,6 +80,12 @@ export default class Map {
 
     stopDraw() {
         this._draw = 'no';
+    }
+
+    addMarker(lat, lng, title, details) {
+        const marker = L.marker([lat, lng]).addTo(this._osm);
+        marker.bindPopup(`<strong>${title}</strong><br/><p>${details}</p>`).openPopup();
+        this.marker_list.push(marker);
     }
 
     removeLastPolygonsPoint() {
@@ -93,14 +110,42 @@ export default class Map {
             method: 'post',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'authorization':  'Access browserBearer ' + window.localStorage.getItem(st.KEY_AUTHENTIFICATION_TOKEN)
+                'authorization': 'Access browserBearer ' + window.localStorage.getItem(st.KEY_AUTHENTIFICATION_TOKEN)
             }),
-            body: JSON.stringify({ lat, lng, action,
-                pid: window.localStorage.getItem(st.KEY_USER_PROJECT_ID) })
+            body: JSON.stringify({
+                lat, lng, action,
+                pid: window.localStorage.getItem(st.KEY_USER_PROJECT_ID)
+            })
         }).then(response => response.json())
-        .then((data) => {
-            console.log(data);
-        });
+            .then((data) => {
+                console.log(data);
+            });
+    }
+
+    changeDispositifMarker(id) {
+        this.dispositif = id;
+    }
+
+    updateDispositifLocation(lat, lng) {
+        const url = CADO_API_URL + '/api/dispositif/' + this.dispositif;
+
+        fetch(url, {
+            method: 'put',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'authorization': 'Access browserBearer ' + window.localStorage.getItem(st.KEY_AUTHENTIFICATION_TOKEN)
+            }),
+            body: JSON.stringify({ lat, lng })
+        }).then(response => response.json())
+            .then((data) => {
+                console.log(data);
+                const marker = L.marker([lat, lng]).addTo(this._osm);
+                marker.bindPopup(`<strong>Dispositif</strong><br/><p>${data.dispositif.name}</p>`).openPopup();
+                this.marker_list.push(marker);
+                const rm = this.marker_list.find((value, index) => value._latlng.lat === data.dispositif.lat
+                    && value._latlng.lng === data.dispositif.lng);
+                this.removeMarker2(rm);
+            });
     }
 }
 

@@ -12,7 +12,7 @@
         crossorigin="" />
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lexend+Exa&display=swap" rel="stylesheet">
 
     <!-- Fontawsome -->
     <link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all">
@@ -153,17 +153,21 @@
 
                 <div>
                     <label for="">Quantité: </label>
-                    <input type="number" placeholder="Quantité moyenne" />
+                    <input type="number" class="quantity-unit" placeholder="Quantité moyenne" />
+                </div>
+
+                <div>
+                    <label for="dispo-name">Donnez un nom au dispositif</label>
+                    <input type="text" id="dispo-name" placeholder="name" value="Sans Nom"/>
                 </div>
             </div>
+            <button class="button-add-dispositif">Ajouter le dispositif</button>
+        </div>
+    </div>
 
-            <div class="description">
-                <h1>Description</h1>
-                <h2>3 poubelles</h2>
-                <h3>Papier, plastique, alluminium</h3>
-                <h4>Moyenne: 16 L</h4>
-            </div>
-            <button>Ajouter le dispositif</button>
+    <div class="qrcode-modal modal">
+        <div class="modal-content">
+            <div id="qrcode-canvas"></div>
         </div>
     </div>
 
@@ -173,6 +177,7 @@
         crossorigin=""></script>
 
     <!-- My Javascript -->
+    <script src="/cado/javascripts/util/qrcode.min.js"></script>
     <script src="/cado/javascripts/app/header-bar.js"></script>
     <script src="/cado/javascripts/app/app.js" type="module"></script>
 

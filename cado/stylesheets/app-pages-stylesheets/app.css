@@ -25,7 +25,7 @@
 .link-and-input a {
     text-decoration: none;
     color: white;
-    font-size: 14px;
+    font-size: 12px;
     display: inline-block;
 }
 
@@ -61,7 +61,7 @@
     text-decoration: none;
     padding: 8px 20px;
     margin: 4px 10px;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .left-menu .link:hover {
@@ -105,7 +105,7 @@
     text-decoration: none;
     display: grid;
     font-weight: normal;
-    font-size: 16px;
+    font-size: 14px;
     padding: 10px;
     grid-template-columns: 30px auto 30px;
     display: flex;
@@ -138,4 +138,44 @@
 @keyframes move-right-to-left {
     0% { transform: translateX(100%)}
     100% { transform: translateX(0%)}
+}
+
+.trash-item {
+    margin: 10px;
+    padding: 5px 20px;
+}
+
+.all-trash {
+    overflow: scroll;
+}
+
+.trash-item * {
+    font-size: 12px;
+}
+
+.trash-is-not-deploy {
+    color: tomato;
+}
+
+.trash-item .top {
+    display: flex;
+}
+
+.trash-item .top h1 {
+    flex: 9;
+}
+
+.trash-item .top span {
+    flex: 1;
+    font-size: 20px;
+    color: white;
+}
+
+.trash-item .top span:hover {
+    cursor: pointer;
+}
+
+.trash-item:hover {
+    background-color: #cccccc;
+    border-radius: 10px;
 }
